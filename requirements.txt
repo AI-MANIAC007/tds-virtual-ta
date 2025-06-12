@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+openai
+langchain
+faiss-cpu
+bs4
+requests
+python-multipart
+pillow
+pytesseract
