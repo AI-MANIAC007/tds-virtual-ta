@@ -5,7 +5,7 @@ from langchain_community.document_loaders import DirectoryLoader, JSONLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 
-os.environ["AIPROXY_TOKEN"] = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjIwMDE5MTVAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.yyL_AkgLzYF6sRRlwrAPZHWRpDX6qvHdBRFisQVRaf4"
+os.environ["AIPIPE_TOKEN"] = "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjI0ZjIwMDE5MTVAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.FdixSrNdglNv2jOA78f6NDwH8BxXLMmP2tYpehHhVn4"
 
 def create_vector_store():
     course_loader = DirectoryLoader("data/course", glob="*.html")
