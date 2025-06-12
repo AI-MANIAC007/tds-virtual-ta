@@ -5,7 +5,7 @@ from langchain_community.document_loaders import DirectoryLoader, JSONLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import os
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 def create_vector_store():
     course_loader = DirectoryLoader("data/course", glob="*.html")
