@@ -1,14 +1,15 @@
-from fastapi import FastAPI, UploadFile
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from rag.retrieve import get_answer
 
 app = FastAPI()
 
-# ✅ Add CORS middleware here
+# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can restrict this to specific domains if needed
+    allow_origins=["*"],  # or restrict to specific domains
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -19,6 +20,7 @@ class Query(BaseModel):
     image: str | None = None
 
 @app.post("/api/")
+@app.post("/")  # ✅ NEW: this allows POST to root URL
 def answer(query: Query):
     final_question = query.question
     answer = get_answer(final_question)
@@ -26,6 +28,10 @@ def answer(query: Query):
         "answer": answer,
         "links": []
     }
+
+@app.get("/")  # Optional, helps for browser test
+def root():
+    return {"message": "TDS Virtual TA API is running."}
 
 # ✅ Optional: define a GET / route to help debugging
 @app.get("/")
