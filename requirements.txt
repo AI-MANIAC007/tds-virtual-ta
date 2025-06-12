@@ -2,6 +2,7 @@ fastapi
 uvicorn
 openai
 langchain
+langchain-community
 faiss-cpu
 bs4
 requests
