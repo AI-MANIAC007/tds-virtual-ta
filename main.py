@@ -1,39 +1,38 @@
-
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+# main.py
+from fastapi import FastAPI, UploadFile, Request
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from rag.retrieve import get_answer
 
 app = FastAPI()
 
-# Enable CORS
+# Allow all origins for CORS (safe for public APIs)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # or restrict to specific domains
+    allow_origins=["*"],  # Or specify your domain(s) if needed
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Root endpoint for health check / platform validation
+@app.api_route("/", methods=["GET", "POST", "HEAD"])
+async def root(request: Request):
+    return {"message": "TDS Virtual TA API is live."}
+
+# Query schema
 class Query(BaseModel):
     question: str
     image: str | None = None
 
+# POST endpoint to get answers
 @app.post("/api/")
-@app.post("/")  # ✅ NEW: this allows POST to root URL
 def answer(query: Query):
     final_question = query.question
     answer = get_answer(final_question)
+
     return {
         "answer": answer,
-        "links": []
+        "links": []  # You can later add parsed links here
     }
 
-@app.get("/")  # Optional, helps for browser test
-def root():
-    return {"message": "TDS Virtual TA API is running."}
-
-# ✅ Optional: define a GET / route to help debugging
-@app.get("/")
-def root():
-    return {"message": "TDS Virtual TA API is running."}
