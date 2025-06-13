@@ -9,12 +9,11 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 embedding_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 def create_vector_store():
-    course_loader = DirectoryLoader("data/course", glob="*.html")
     disc_loader = JSONLoader("data/discourse/tds_kb_posts.json", jq_schema=".[] | .posts[]", text_content=False)
 
     docs = course_loader.load() + disc_loader.load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
     chunks = splitter.split_documents(docs)
 
-    vectordb = FAISS.from_documents(chunks, OpenAIEmbeddings())
+    vectordb = FAISS.from_documents(chunks, OpenAIEmbeddings(openai_api_key=openai_api_key))
     vectordb.save_local("rag/index")
