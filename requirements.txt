@@ -2,10 +2,14 @@ fastapi
 uvicorn
 openai
 langchain
-langchain-community
 faiss-cpu
 bs4
 requests
 python-multipart
 pillow
 pytesseract
+langchain-community
+langchain-openai
+sentence-transformers
+python-dotenv
+jq
