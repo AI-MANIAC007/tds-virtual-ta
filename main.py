@@ -31,3 +31,4 @@ async def answer(query: Query):
 @app.api_route("/", methods=["GET", "HEAD"])
 async def health_check():
     return {"message": "TDS Virtual TA API is live."}
+
