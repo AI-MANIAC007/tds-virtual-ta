@@ -8,6 +8,7 @@ python-multipart
 pillow
 pytesseract
 langchain-community
+langchain-ollama
 transformers
 huggingface-hub
 sentence-transformers
