@@ -23,8 +23,6 @@ COPY . /app
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Download the model ahead of time
-RUN ollama pull mistral
 
 # Expose FastAPI port
 EXPOSE 8000
