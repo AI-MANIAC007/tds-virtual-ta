@@ -18,6 +18,7 @@ WORKDIR /app
 
 # Copy files
 COPY . /app
+COPY rag/index /app/rag/index
 
 # Install Python dependencies
 RUN pip install --upgrade pip
